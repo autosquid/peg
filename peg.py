@@ -79,6 +79,10 @@ def distPoint2Line(P,  L):
         Input:  a Point P and a Line L (in any dimension)
         Return: the shortest distance from P to L
     """
+    if len(L) != 2:
+        print "Error: Line has 2 end-points, plz check shape"
+        return None
+
     v = L[1] - L[0]
     w = P - L[0]
 
