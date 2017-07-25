@@ -8,16 +8,19 @@ def normFrom3Points(C, L0, L1):
 
 
 def planeFrom3Points(C, L0, L1):
+    """Returns: Plane Object"""
     n = normFrom3Points(C, L0, L1)
     return Plane(C, n)
 
 
 class Plane:
+    """given a point P on plane, and the normal direction of the plane"""
     def __init__(self, P, N):
         self.P = P
         self.N = N
 
     def intersection_line(self, S):
+        """Returns intersection point"""
         P0 = S[0]
         P1 = S[1]
 
@@ -25,6 +28,7 @@ class Plane:
         return P0 + s * (P1-P0)
 
     def intersection_plane(self, three_points_on_other_Plane):
+        """Return: a line of a tuple of two points"""
         V0, V1, V2 = three_points_on_other_Plane
         P0 = self.intersection_line([V0, V1])
         P1 = self.intersection_line([V0, V2])
@@ -50,7 +54,6 @@ def segmentPolygonDistance(s, poly, samples=10, signed=False):
     else:
         vs = np.fabs([cv2.pointPolygonTest(poly, tuple(p), True) for p in ps])
     return np.average(vs)
-
 
 
 def distanceBetweenParallelLines(l, L):
@@ -236,8 +239,8 @@ def inSegment(P, S):
     return 0
 
 
-def sampledDistBetweenSegments(L1, L2):
-    d = [distPoint2Line(L1[0] * (1.0-r) + L1[0] * r, L2) for r in np.linspace(0.0, 1.0, 10, True)] + [distPoint2Line(L2[0] * (1.0-r) + L2[0] * r, L1) for r in np.linspace(0.0, 1.0, 10, True)]
+def sampledDistBetweenSegments(L1, L2, n=10):
+    d = [distPoint2Line(L1[0] * (1.0-r) + L1[0] * r, L2) for r in np.linspace(0.0, 1.0, n, True)] + [distPoint2Line(L2[0] * (1.0-r) + L2[0] * r, L1) for r in np.linspace(0.0, 1.0, n, True)]
     return np.average(d)
 
 

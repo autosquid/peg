@@ -56,7 +56,7 @@ setup(
 
     py_modules=["peg"],
 
-    install_requires=['numpy', 'sklearn'],
+    install_requires=['numpy', ],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
